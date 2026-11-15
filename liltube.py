@@ -15,12 +15,12 @@ from pathlib import Path
 CHANNELS = {
     "maths": ["3blue1brown", "Mathologer", "standupmaths", "numberphile", "Reducible", "Mathemaniac", "aleph0", "MichaelPennMath"],
     "physics": ["pbsspacetime", "SteveMould", "minutephysics", "veritasium", "AlphaPhoenixChannel", "sixtysymbols", "ScienceClic", "PhysicsExplainedVideos"],
-    "ml": ["AndrejKarpathy", "WelchLabs", "SebastianLague", "YannicKilcher", "umarjamilai", "AICoffeeBreak"],
-    "building": ["StuffMadeHere", "AppliedScience", "BreakingTaps", "smartereveryday", "BenEater", "jamesbruton", "ThisOldTony", "TechIngredients", "HuygensOptics", "CNLohr"],
-    "rockets": ["BPSspace", "scottmanley", "EverydayAstronaut"],
+    "ml": ["AndrejKarpathy", "WelchLabs", "SebastianLague", "YannicKilcher", "umarjamilai", "AICoffeeBreak", "bycloudAI"],
+    "building": ["StuffMadeHere", "AppliedScience", "BreakingTaps", "smartereveryday", "BenEater", "jamesbruton", "ThisOldTony", "TechIngredients", "HuygensOptics", "CNLohr", "DIYPerks", "greatscottlab", "ElectroBOOM", "TechnologyConnections", "PracticalEngineeringChannel"],
+    "rockets": ["BPSspace", "scottmanley", "EverydayAstronaut", "BrianBDouglas", "Eigensteve"],
     "film": ["ThomasFlight", "LikeStoriesofOld", "LessonsfromtheScreenplay", "JacobGeller", "Nerdwriter1", "KaptainKristian", "NowYouSeeIt"],
-    "cool": ["PrimerBlobs", "RealEngineering", "kurzgesagt", "NileRed", "CodeParade", "CGPGrey", "Wendoverproductions", "TomScottGo"],
-    "fun": ["whirow"],
+    "cool": ["PrimerBlobs", "RealEngineering", "kurzgesagt", "NileRed", "CodeParade", "CGPGrey", "Wendoverproductions", "TomScottGo", "Asianometry", "BranchEducation", "Acerola_t", "EmergentGarden"],
+    "fun": ["whirow", "Ididathing", "MichaelReeves", "WilliamOsman", "AllenPan", "DougDoug", "jetlagthegame", "CaptainDisillusion", "answerinprogress"],
 }
 
 HOME = Path(os.environ.get("LILTUBE_DIR", Path.home() / ".liltube"))
