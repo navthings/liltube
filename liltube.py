@@ -131,23 +131,24 @@ PAGE = r"""<!doctype html>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>liltube</title>
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%23ff7a45'/%3E%3Cpath d='M12 9.5v13l10.5-6.5z' fill='%23140f0c'/%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%232f5bea'/%3E%3Cpath d='M12 9.5v13l10.5-6.5z' fill='white'/%3E%3C/svg%3E">
 <style>
-  :root { --bg:#13100e; --card:#1e1916; --line:#2d2622; --text:#f4ede7; --dim:#968a81; --accent:#ff7a45; }
+  :root { --bg:#f5f2ec; --card:#e8e3da; --line:#dcd5ca; --text:#1d1b18; --dim:#6f675e; --accent:#2f5bea; --on:#fff; --hover:#b9b0a3; }
+  @media (prefers-color-scheme:dark) { :root { --bg:#0f1218; --card:#1a1f29; --line:#262d3a; --text:#e9ecf2; --dim:#8a93a4; --accent:#7c9cff; --on:#0f1218; --hover:#3b4456; } }
   * { box-sizing:border-box; margin:0; }
   html { scrollbar-color:var(--line) transparent; }
   body { background:var(--bg); color:var(--text); font:15px/1.4 ui-sans-serif, system-ui, -apple-system, sans-serif; -webkit-font-smoothing:antialiased; }
-  header { position:sticky; top:0; z-index:5; display:flex; flex-wrap:wrap; align-items:center; gap:12px 20px; padding:16px clamp(16px,4vw,56px); background:rgba(19,16,14,.82); backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px); border-bottom:1px solid var(--line); }
+  header { position:sticky; top:0; z-index:5; display:flex; flex-wrap:wrap; align-items:center; gap:12px 20px; padding:16px clamp(16px,4vw,56px); background:color-mix(in srgb, var(--bg) 85%, transparent); backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px); border-bottom:1px solid var(--line); }
   .logo { display:flex; align-items:baseline; gap:10px; }
-  h1 { font-size:24px; letter-spacing:-0.04em; font-weight:750; }
-  h1 span { color:var(--accent); }
+  h1 { font:italic 600 26px/1 ui-serif, 'New York', Georgia, serif; letter-spacing:-0.02em; }
+  h1::after { content:""; display:inline-block; width:7px; height:7px; border-radius:50%; background:var(--accent); margin-left:3px; }
   .sub { color:var(--dim); font-size:12px; }
   .chips { display:flex; flex-wrap:wrap; gap:6px; }
   button { font:inherit; cursor:pointer; }
   .chip { background:none; border:1px solid var(--line); color:var(--dim); padding:5px 12px; border-radius:99px; font-size:13px; transition:color .15s, border-color .15s; }
-  .chip:hover { color:var(--text); border-color:#4a3f38; }
+  .chip:hover { color:var(--text); border-color:var(--hover); }
   .chip.on { background:var(--text); color:var(--bg); border-color:var(--text); }
-  .chip.ch { background:var(--accent); color:#1a0d06; border-color:var(--accent); }
+  .chip.ch { background:var(--accent); color:var(--on); border-color:var(--accent); }
   .tools { margin-left:auto; display:flex; gap:8px; align-items:center; }
   .toggle { background:none; border:1px solid var(--line); color:var(--dim); padding:6px 11px; border-radius:8px; font-size:13px; }
   .toggle.on { color:var(--accent); border-color:var(--accent); }
@@ -162,8 +163,8 @@ PAGE = r"""<!doctype html>
   .thumb { position:relative; aspect-ratio:16/9; border-radius:11px; overflow:hidden; background:var(--card); }
   .thumb img { width:100%; height:100%; object-fit:cover; transition:transform .3s ease; }
   .vid:hover img { transform:scale(1.045); }
-  .vid:hover h3 { color:#fff; }
-  .new { position:absolute; top:8px; left:8px; background:var(--accent); color:#1a0d06; font-size:11px; font-weight:700; padding:2px 7px; border-radius:5px; }
+  .vid:hover h3 { color:var(--accent); }
+  .new { position:absolute; top:8px; left:8px; background:var(--accent); color:var(--on); font-size:11px; font-weight:700; padding:2px 7px; border-radius:5px; }
   .vid h3 { font-size:14.5px; font-weight:600; margin:10px 0 4px; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
   .meta { color:var(--dim); font-size:13px; }
   .meta .name { background:none; border:0; padding:0; color:var(--dim); font-size:13px; }
@@ -171,7 +172,7 @@ PAGE = r"""<!doctype html>
   .vid.seen { opacity:.38; }
   .vid.seen:hover { opacity:.8; }
   .empty { color:var(--dim); padding:80px 0; text-align:center; }
-  #player { position:fixed; inset:0; z-index:10; background:rgba(8,6,5,.97); display:none; overflow-y:auto; padding:clamp(16px,4vw,48px); }
+  #player { position:fixed; inset:0; z-index:10; background:rgba(10,12,16,.97); --text:#e9ecf2; --dim:#8a93a4; --card:#1a1f29; --line:#262d3a; color:var(--text); display:none; overflow-y:auto; padding:clamp(16px,4vw,48px); }
   #player.on { display:block; }
   .stage { max-width:1100px; margin:0 auto; }
   .stage iframe { width:100%; aspect-ratio:16/9; border:0; border-radius:14px; background:#000; }
@@ -182,13 +183,13 @@ PAGE = r"""<!doctype html>
   .nav { display:flex; gap:6px; flex-shrink:0; }
   .nav button, .nav a { background:var(--card); border:1px solid var(--line); color:var(--text); padding:7px 12px; border-radius:8px; font-size:13px; text-decoration:none; }
   .nav button:hover, .nav a:hover { border-color:var(--accent); }
-  .hint { color:#5d534c; font-size:12px; margin-top:22px; }
+  .hint { color:#5a6272; font-size:12px; margin-top:22px; }
   @media (max-width:700px) { .tools { margin-left:0; width:100%; } input { flex:1; } .info { flex-direction:column; } }
 </style>
 </head>
 <body>
 <header>
-  <div class="logo"><h1>lil<span>tube</span></h1><span class="sub" id="sub"></span></div>
+  <div class="logo"><h1>liltube</h1><span class="sub" id="sub"></span></div>
   <div class="chips" id="chips"></div>
   <div class="tools">
     <button class="toggle" id="hide">hide watched</button>
